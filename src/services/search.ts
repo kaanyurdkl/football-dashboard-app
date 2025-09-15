@@ -27,7 +27,7 @@ export async function searchTeams(query: string): Promise<SearchTeamResult[]> {
       `https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t=${encodeURIComponent(
         query
       )}`,
-      { cache: "no-store" }
+      { cache: "force-cache" }
     );
 
     if (!response.ok) return [];
