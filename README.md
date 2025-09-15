@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Football Dashboard
+
+A football dashboard built with Next.js displaying league standings, team information, and player statistics with interactive data visualizations.
+
+## API Choice
+
+**Selected API:** [TheSportsDB.com](https://thesportsdb.com)
+
+Chosen for its comprehensive football data, free tier availability, and reliable service. Provides leagues, teams, players, standings, and match information without cost barriers.
+
+## Key Features
+
+- **League Standings**: Interactive tables with season selection
+- **Team Pages**: Detailed information with player squads and social media links
+- **Search**: Real-time search for teams and leagues with smart caching
+- **Data Visualization**: Position and nationality distribution charts using Recharts
+- **Responsive Design**: Mobile-first approach with shadcn/ui components
+
+## Technology Stack
+
+- Next.js 15, React 19, TypeScript
+- Tailwind CSS with shadcn/ui components
+- Recharts for data visualization
+- Deployed on Vercel
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Testing the App
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Exploring Team Pages:**
+- Search for "Arsenal" or "Manchester United" in the search bar
+- Click any team name in the league standings tables
+- View player squads with position and nationality distribution charts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Exploring League Pages:**
+- Search for leagues like "Premier League" or "La Liga"
+- Click featured league cards on the homepage
+- Browse standings with season selection functionality
 
-## Learn More
+**Key Features to Test:**
+- Interactive charts showing player position and nationality data
+- Real-time search with smart caching
+- Responsive design across different screen sizes
+- Social media links and team information on team pages
 
-To learn more about Next.js, take a look at the following resources:
+## Future Improvements
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Enhanced Data**: Premium API integration for live scores and detailed statistics
+- **User Features**: Favorite teams, personalized dashboards, dark mode
+- **Advanced Visualizations**: Performance trends, heat maps, league comparisons
+- **Design & UX**: Improved visual design, animations, accessibility enhancements
+- **Testing**: Unit tests, integration tests, end-to-end testing with Playwright
+- **Technical**: Progressive Web App, advanced caching with Redis
