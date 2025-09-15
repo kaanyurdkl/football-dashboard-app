@@ -1,8 +1,8 @@
-// Types
 interface TeamDetails {
   idTeam: string;
   strTeam: string;
   strAlternate?: string;
+  strTeamAlternate?: string;
   intFormedYear?: string;
   strSport: string;
   strLeague: string;
@@ -11,13 +11,16 @@ interface TeamDetails {
   strStadiumThumb?: string;
   strStadiumDescription?: string;
   strStadiumLocation?: string;
+  strLocation?: string;
   strWebsite?: string;
   strFacebook?: string;
   strTwitter?: string;
   strInstagram?: string;
   strYoutube?: string;
   strTeamBadge?: string;
+  strBadge?: string;
   strTeamBanner?: string;
+  strBanner?: string;
   strTeamLogo?: string;
   strDescriptionEN?: string;
   strCountry?: string;
