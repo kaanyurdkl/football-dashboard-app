@@ -1,22 +1,23 @@
+// LIBRARIES
+import { notFound } from "next/navigation";
+// SERVICES
+import { getTeam } from "@/services/team";
+
 export default async function TeamPage({
   params,
 }: {
   params: Promise<{ name: string }>;
 }) {
   const { name } = await params;
-
   const decodedName = decodeURIComponent(name);
 
-  const response = await fetch(
-    `https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t=${encodeURIComponent(
-      decodedName
-    )}`,
-    { cache: "force-cache" }
-  );
+  const team = await getTeam(decodedName);
 
-  const data = await response.json();
+  if (!team) {
+    notFound();
+  }
 
-  console.log(data.teams?.[0]);
+  console.log(team);
 
-  return <div>{name}</div>;
+  return <div>{team.strTeam}</div>;
 }
