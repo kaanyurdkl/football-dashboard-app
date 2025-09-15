@@ -5,7 +5,7 @@ import { getTodaysMatches } from "@/services/matches";
 // CONFIG
 import { FEATURED_LEAGUES } from "@/config/leagues";
 
-export default async function Stats({
+export default async function StatsSection({
   featuredTeamsCount,
   featuredStadiumsCount,
 }) {
