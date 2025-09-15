@@ -23,7 +23,11 @@ export default function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        <SidebarMenuButton asChild disabled className="hover:bg-transparent">
+        <SidebarMenuButton
+          asChild
+          disabled
+          className="hover:bg-transparent active:bg-transparent"
+        >
           <div>
             <Bolt />
             <span className="font-bold">Sports Dashboard App</span>

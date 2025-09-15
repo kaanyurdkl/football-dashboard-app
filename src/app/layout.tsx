@@ -1,8 +1,9 @@
 // LIBRARIES
 import { Inter } from "next/font/google";
 // COMPONENTS
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/AppSidebar";
+import Header from "@/components/layout/Header";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 // TYPES
 import type { Metadata } from "next";
 // STYLES
@@ -28,6 +29,7 @@ export default function RootLayout({
         <SidebarProvider>
           <AppSidebar />
           <SidebarInset>
+            <Header />
             <main className="flex-1 p-6">{children}</main>
           </SidebarInset>
         </SidebarProvider>
