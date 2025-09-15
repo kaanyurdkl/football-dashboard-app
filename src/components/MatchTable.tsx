@@ -1,3 +1,4 @@
+// COMPONENTS
 import {
   Table,
   TableBody,

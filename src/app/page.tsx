@@ -5,12 +5,17 @@ import RecentMatchesSection from "@/components/RecentMatchesSection";
 // SERVICES
 import { getFeaturedTeamsAndStadiums } from "@/services/teams";
 import { getTodaysAndRecentMatches } from "@/services/matches";
-import { getFeaturedLeaguesDetails } from "@/services/leagues";
+import { getAllLeagues } from "@/services/leagues";
 
 export default async function DashboardPage() {
+  const [teamsData, leagues] = await Promise.all([
+    getFeaturedTeamsAndStadiums(),
+    getAllLeagues(),
+  ]);
+
   const { featuredTeamsCount, featuredStadiumsCount, teamsByLeague } =
-    await getFeaturedTeamsAndStadiums();
-  const { leagues } = await getFeaturedLeaguesDetails();
+    teamsData;
+
   const { todaysMatchesCount, recentMatchesByLeague } =
     await getTodaysAndRecentMatches(leagues);
 

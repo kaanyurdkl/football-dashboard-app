@@ -1,3 +1,4 @@
+// CONFIG
 import { FEATURED_LEAGUES } from "@/config/leagues";
 
 export async function getFeaturedTeamsAndStadiums() {

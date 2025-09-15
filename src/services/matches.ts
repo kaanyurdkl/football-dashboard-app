@@ -1,23 +1,12 @@
+// CONFIG
 import { FEATURED_LEAGUES } from "@/config/leagues";
+// UTILS
+import { getTodayDate, getYesterdayDate } from "@/lib/utils";
 
 export async function getTodaysAndRecentMatches(leagues: any[] | null) {
   try {
-    const now = new Date();
-    const today =
-      now.getFullYear() +
-      "-" +
-      String(now.getMonth() + 1).padStart(2, "0") +
-      "-" +
-      String(now.getDate()).padStart(2, "0");
-
-    const yesterday = new Date(now);
-    yesterday.setDate(yesterday.getDate() - 1);
-    const yesterdayStr =
-      yesterday.getFullYear() +
-      "-" +
-      String(yesterday.getMonth() + 1).padStart(2, "0") +
-      "-" +
-      String(yesterday.getDate()).padStart(2, "0");
+    const today = getTodayDate();
+    const yesterdayStr = getYesterdayDate();
 
     const promises = FEATURED_LEAGUES.flatMap((league) => [
       fetch(
@@ -37,7 +26,7 @@ export async function getTodaysAndRecentMatches(leagues: any[] | null) {
     }
 
     let todaysMatchesCount = 0;
-    const recentMatchesByLeague = {};
+    const recentMatchesByLeague: Record<string, any> = {};
 
     FEATURED_LEAGUES.forEach((league, index) => {
       const todayData = results[index * 2];

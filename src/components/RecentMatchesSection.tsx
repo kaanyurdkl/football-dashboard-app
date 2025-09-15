@@ -1,6 +1,8 @@
+// LIBRARIES
+import Image from "next/image";
+// COMPONENTS
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import MatchTable from "@/components/MatchTable";
-import Image from "next/image";
 interface Match {
   strEvent: string;
   strHomeTeam: string;
