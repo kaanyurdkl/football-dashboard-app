@@ -1,5 +1,7 @@
-import { FEATURED_LEAGUES } from "@/config/leagues";
+// LIBRARIES
 import { notFound } from "next/navigation";
+// CONFIG
+import { FEATURED_LEAGUES } from "@/config/leagues";
 
 export default async function LeaguePage({
   params,

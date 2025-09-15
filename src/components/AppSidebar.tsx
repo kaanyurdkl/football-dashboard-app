@@ -16,7 +16,9 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 // ICONS
-import { Bolt, Home } from "lucide-react";
+import { Bolt, Home, Trophy } from "lucide-react";
+// CONFIG
+import { FEATURED_LEAGUES } from "@/config/leagues";
 
 export default function AppSidebar() {
   const pathname = usePathname();
@@ -47,6 +49,26 @@ export default function AppSidebar() {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>Featured Leagues</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {FEATURED_LEAGUES.map((league) => (
+                <SidebarMenuItem key={league.idLeague}>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={pathname === `/league/${league.idLeague}`}
+                  >
+                    <Link href={`/league/${league.idLeague}`}>
+                      <Trophy />
+                      <span>{league.strLeague}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
