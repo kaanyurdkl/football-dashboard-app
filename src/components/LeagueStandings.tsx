@@ -7,6 +7,8 @@ import useSWR from "swr";
 import Image from "next/image";
 import Link from "next/link";
 import SeasonSelector from "@/components/SeasonSelector";
+// ICONS
+import { Info } from "lucide-react";
 
 interface Team {
   idStanding: string;
@@ -152,7 +154,8 @@ export default function LeagueStandings({
             </thead>
             <tbody className={isLoading ? "opacity-50" : ""}>
               {standings.map((team: Team) => {
-                const isHighlighted = highlightTeamId && team.idTeam === highlightTeamId;
+                const isHighlighted =
+                  highlightTeamId && team.idTeam === highlightTeamId;
                 return (
                   <tr
                     key={team.idStanding}
@@ -163,51 +166,62 @@ export default function LeagueStandings({
                     }`}
                   >
                     <td className="p-4 text-sm font-medium">{team.intRank}</td>
-                  <td className="p-4">
-                    <div className="flex items-center gap-3">
-                      {team.strBadge && (
-                        <div className="relative w-6 h-6">
-                          <Image
-                            src={team.strBadge}
-                            alt={`${team.strTeam} badge`}
-                            fill
-                            className="object-contain"
-                            sizes="24px"
-                          />
-                        </div>
-                      )}
-                      <Link
-                        href={`/team/${encodeURIComponent(team.strTeam)}`}
-                        className="text-sm font-medium hover:text-primary hover:underline transition-colors"
-                      >
-                        {team.strTeam}
-                      </Link>
-                    </div>
-                  </td>
-                  <td className="text-center p-4 text-sm">{team.intPlayed}</td>
-                  <td className="text-center p-4 text-sm">{team.intWin}</td>
-                  <td className="text-center p-4 text-sm">{team.intDraw}</td>
-                  <td className="text-center p-4 text-sm">{team.intLoss}</td>
-                  <td className="text-center p-4 text-sm">
-                    {team.intGoalsFor}
-                  </td>
-                  <td className="text-center p-4 text-sm">
-                    {team.intGoalsAgainst}
-                  </td>
-                  <td className="text-center p-4 text-sm">
-                    {team.intGoalDifference}
-                  </td>
-                  <td className="text-center p-4 text-sm font-bold">
-                    {team.intPoints}
-                  </td>
-                  <td className="text-center p-4 text-xs font-mono">
-                    {team.strForm}
-                  </td>
+                    <td className="p-4">
+                      <div className="flex items-center gap-3">
+                        {team.strBadge && (
+                          <div className="relative w-6 h-6">
+                            <Image
+                              src={team.strBadge}
+                              alt={`${team.strTeam} badge`}
+                              fill
+                              className="object-contain"
+                              sizes="24px"
+                            />
+                          </div>
+                        )}
+                        <Link
+                          href={`/team/${encodeURIComponent(team.strTeam)}`}
+                          className="text-sm font-medium hover:text-primary hover:underline transition-colors"
+                        >
+                          {team.strTeam}
+                        </Link>
+                      </div>
+                    </td>
+                    <td className="text-center p-4 text-sm">
+                      {team.intPlayed}
+                    </td>
+                    <td className="text-center p-4 text-sm">{team.intWin}</td>
+                    <td className="text-center p-4 text-sm">{team.intDraw}</td>
+                    <td className="text-center p-4 text-sm">{team.intLoss}</td>
+                    <td className="text-center p-4 text-sm">
+                      {team.intGoalsFor}
+                    </td>
+                    <td className="text-center p-4 text-sm">
+                      {team.intGoalsAgainst}
+                    </td>
+                    <td className="text-center p-4 text-sm">
+                      {team.intGoalDifference}
+                    </td>
+                    <td className="text-center p-4 text-sm font-bold">
+                      {team.intPoints}
+                    </td>
+                    <td className="text-center p-4 text-xs font-mono">
+                      {team.strForm}
+                    </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
+        </div>
+      )}
+      {hasStandings && !error && (
+        <div className="px-6 py-4">
+          <p className="text-xs text-muted-foreground flex items-center gap-1">
+            <Info className="h-3 w-3" />
+            Due to API limitations, only the top 5 teams are displayed. Premium
+            API access is required for complete league standings.
+          </p>
         </div>
       )}
     </div>
