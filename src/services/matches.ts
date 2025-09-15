@@ -1,6 +1,6 @@
 import { FEATURED_LEAGUES } from "@/config/leagues";
 
-export async function getTodaysMatches() {
+export async function getTodaysAndRecentMatches(leagues: any[] | null) {
   try {
     const now = new Date();
     const today =
@@ -10,12 +10,25 @@ export async function getTodaysMatches() {
       "-" +
       String(now.getDate()).padStart(2, "0");
 
-    const promises = FEATURED_LEAGUES.map((league) =>
+    const yesterday = new Date(now);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayStr =
+      yesterday.getFullYear() +
+      "-" +
+      String(yesterday.getMonth() + 1).padStart(2, "0") +
+      "-" +
+      String(yesterday.getDate()).padStart(2, "0");
+
+    const promises = FEATURED_LEAGUES.flatMap((league) => [
       fetch(
         `https://www.thesportsdb.com/api/v1/json/123/eventsday.php?d=${today}&l=${league.strLeague}`,
         { cache: "force-cache" }
-      ).then((res) => res.json())
-    );
+      ).then((res) => res.json()),
+      fetch(
+        `https://www.thesportsdb.com/api/v1/json/123/eventsday.php?d=${yesterdayStr}&l=${league.strLeague}`,
+        { cache: "force-cache" }
+      ).then((res) => res.json()),
+    ]);
 
     const results = await Promise.all(promises);
 
@@ -24,14 +37,30 @@ export async function getTodaysMatches() {
     }
 
     let todaysMatchesCount = 0;
+    const recentMatchesByLeague = {};
 
     FEATURED_LEAGUES.forEach((league, index) => {
-      const todayData = results[index];
+      const todayData = results[index * 2];
+      const yesterdayData = results[index * 2 + 1];
 
       todaysMatchesCount += todayData?.events?.length || 0;
+
+      const todayMatches = todayData?.events || [];
+      const yesterdayMatches = yesterdayData?.events || [];
+
+      const allMatches = [...todayMatches, ...yesterdayMatches].sort(
+        (a, b) =>
+          new Date(b.dateEvent).getTime() - new Date(a.dateEvent).getTime()
+      );
+
+      recentMatchesByLeague[league.idLeague] = {
+        leagueName: league.strLeague,
+        leagueBadge: leagues?.[index]?.strBadge,
+        matches: allMatches,
+      };
     });
 
-    return { todaysMatchesCount };
+    return { todaysMatchesCount, recentMatchesByLeague };
   } catch (error) {
     if (error instanceof Error && error.message) {
       console.error("Matches data error:", error.message);
@@ -41,6 +70,7 @@ export async function getTodaysMatches() {
 
     return {
       todaysMatchesCount: null,
+      recentMatchesByLeague: null,
     };
   }
 }
