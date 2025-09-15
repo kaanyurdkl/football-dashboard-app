@@ -13,19 +13,8 @@ import {
 } from "@/components/ui/chart";
 // UTILS
 import { getNationalityDistribution } from "@/lib/chart-utils";
-
-interface Player {
-  idPlayer: string;
-  strPlayer: string;
-  strNationality?: string;
-  strPosition?: string;
-  dateBorn?: string;
-  strHeight?: string;
-  strWeight?: string;
-  strThumb?: string;
-  strCutout?: string;
-  strDescriptionEN?: string;
-}
+// TYPES
+import type { Player } from "@/types";
 
 interface NationalityChartProps {
   players: Player[];
@@ -47,27 +36,30 @@ export default function NationalityChart({ players }: NationalityChartProps) {
       <div className="bg-card rounded-lg border p-6">
         <h3 className="text-lg font-semibold mb-4">Nationality Distribution</h3>
         <div className="flex items-center justify-center h-32">
-          <p className="text-muted-foreground text-sm">No nationality data available</p>
+          <p className="text-muted-foreground text-sm">
+            No nationality data available
+          </p>
         </div>
       </div>
     );
   }
 
-  // Create chart config dynamically based on available nationalities
-  const chartConfig = nationalityData.reduce((config, item, index) => {
-    const key = item.nationality.toLowerCase().replace(/\s+/g, "");
-    config[key] = {
-      label: item.nationality,
-      color: CHART_COLORS[index % CHART_COLORS.length],
-    };
-    return config;
-  }, {
-    count: {
-      label: "Players",
+  const chartConfig = nationalityData.reduce(
+    (config, item, index) => {
+      const key = item.nationality.toLowerCase().replace(/\s+/g, "");
+      config[key] = {
+        label: item.nationality,
+        color: CHART_COLORS[index % CHART_COLORS.length],
+      };
+      return config;
     },
-  } as ChartConfig);
+    {
+      count: {
+        label: "Players",
+      },
+    } as ChartConfig
+  );
 
-  // Transform data for pie chart with fill colors
   const chartData = nationalityData.map((item) => {
     const key = item.nationality.toLowerCase().replace(/\s+/g, "");
     return {
@@ -88,17 +80,15 @@ export default function NationalityChart({ players }: NationalityChartProps) {
               <ChartTooltipContent
                 hideLabel
                 formatter={(value, name) => [
-                  `${value} players (${chartData.find(d => d.nationality === name)?.percentage}%)`,
+                  `${value} players (${
+                    chartData.find((d) => d.nationality === name)?.percentage
+                  }%)`,
                   chartConfig[name as keyof typeof chartConfig]?.label || name,
                 ]}
               />
             }
           />
-          <Pie
-            data={chartData}
-            dataKey="count"
-            nameKey="nationality"
-          />
+          <Pie data={chartData} dataKey="count" nameKey="nationality" />
           <ChartLegend
             content={<ChartLegendContent nameKey="nationality" />}
             className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"

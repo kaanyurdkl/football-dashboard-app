@@ -1,26 +1,4 @@
-interface Player {
-  idPlayer: string;
-  strPlayer: string;
-  strNationality?: string;
-  strPosition?: string;
-  dateBorn?: string;
-  strHeight?: string;
-  strWeight?: string;
-  strThumb?: string;
-  strCutout?: string;
-  strDescriptionEN?: string;
-}
-
-export interface PositionData {
-  position: string;
-  count: number;
-}
-
-export interface NationalityData {
-  nationality: string;
-  count: number;
-  percentage: number;
-}
+import type { Player, PositionData, NationalityData } from "@/types";
 
 export function getPositionDistribution(players: Player[]): PositionData[] {
   if (!players.length) return [];

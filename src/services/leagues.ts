@@ -1,36 +1,7 @@
 // CONFIG
 import { FEATURED_LEAGUES } from "@/config/leagues";
-
-// Types
-interface LeagueDetails {
-  idLeague: string;
-  strLeague: string;
-  strCountry: string;
-  strBadge?: string;
-  strBanner?: string;
-  strDescriptionEN?: string;
-  strWebsite?: string;
-  strCurrentSeason?: string;
-  intFormedYear?: string;
-  strTrophy?: string;
-}
-
-export interface LeagueStanding {
-  idStanding: string;
-  idTeam: string;
-  intRank: string;
-  strTeam: string;
-  strBadge: string;
-  intPlayed: string;
-  intWin: string;
-  intDraw: string;
-  intLoss: string;
-  intGoalsFor: string;
-  intGoalsAgainst: string;
-  intGoalDifference: string;
-  intPoints: string;
-  strForm: string;
-}
+// TYPES
+import type { LeagueDetails, LeagueStanding } from "@/types";
 
 const handleApiError = (context: string, error: unknown) => {
   const message = error instanceof Error ? error.message : "Unknown error";

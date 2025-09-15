@@ -7,15 +7,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-interface Match {
-  strEvent: string;
-  strHomeTeam: string;
-  strAwayTeam: string;
-  intHomeScore: string;
-  intAwayScore: string;
-  dateEvent: string;
-}
+// TYPES
+import type { Match } from "@/types";
 
 interface MatchTableProps {
   matches: Match[];

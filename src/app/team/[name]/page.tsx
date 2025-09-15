@@ -8,7 +8,9 @@ import NationalityChart from "@/components/NationalityChart";
 import LeagueStandings from "@/components/LeagueStandings";
 // SERVICES
 import { getTeam, getTeamPlayers } from "@/services/team";
-import { getLeagueStandings, type LeagueStanding } from "@/services/leagues";
+import { getLeagueStandings } from "@/services/leagues";
+// TYPES
+import type { LeagueStanding } from "@/types";
 // CONFIG
 import { FEATURED_LEAGUES } from "@/config/leagues";
 // UTILS

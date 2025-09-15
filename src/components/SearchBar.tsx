@@ -13,12 +13,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 // SERVICES
-import {
-  performSearch,
-  type SearchType,
-  type SearchTeamResult,
-  type SearchLeagueResult,
-} from "@/services/search";
+import { performSearch } from "@/services/search";
+// TYPES
+import type { SearchType, SearchTeamResult, SearchLeagueResult } from "@/types";
 // ICONS
 import { Search, Loader2 } from "lucide-react";
 

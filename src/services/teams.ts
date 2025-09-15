@@ -1,17 +1,7 @@
 // CONFIG
 import { FEATURED_LEAGUES } from "@/config/leagues";
-
-interface Team {
-  strTeam: string;
-  strTeamBadge: string;
-}
-
-interface ApiTeam {
-  strTeam: string;
-  strTeamBadge?: string;
-  strBadge?: string;
-  strStadium?: string;
-}
+// TYPES
+import type { Team, ApiTeam } from "@/types";
 
 export async function getFeaturedTeamsAndStadiums(): Promise<{
   featuredTeamsCount: number | null;

@@ -2,20 +2,8 @@
 import { FEATURED_LEAGUES } from "@/config/leagues";
 // UTILS
 import { getTodayDate, getYesterdayDate } from "@/lib/utils";
-
-interface LeagueDetails {
-  strBadge?: string;
-}
-
-interface Match {
-  strEvent: string;
-  strHomeTeam: string;
-  strAwayTeam: string;
-  intHomeScore: string;
-  intAwayScore: string;
-  dateEvent: string;
-  strLeague: string;
-}
+// TYPES
+import type { LeagueDetails, Match } from "@/types";
 
 export async function getTodaysAndRecentMatches(leagues: LeagueDetails[] | null) {
   try {

@@ -11,19 +11,8 @@ import {
 } from "@/components/ui/chart";
 // UTILS
 import { getPositionDistribution } from "@/lib/chart-utils";
-
-interface Player {
-  idPlayer: string;
-  strPlayer: string;
-  strNationality?: string;
-  strPosition?: string;
-  dateBorn?: string;
-  strHeight?: string;
-  strWeight?: string;
-  strThumb?: string;
-  strCutout?: string;
-  strDescriptionEN?: string;
-}
+// TYPES
+import type { Player } from "@/types";
 
 interface PositionChartProps {
   players: Player[];

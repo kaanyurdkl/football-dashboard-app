@@ -1,45 +1,4 @@
-interface TeamDetails {
-  idTeam: string;
-  strTeam: string;
-  strAlternate?: string;
-  strTeamAlternate?: string;
-  intFormedYear?: string;
-  strSport: string;
-  strLeague: string;
-  strDivision?: string;
-  strStadium?: string;
-  strStadiumThumb?: string;
-  strStadiumDescription?: string;
-  strStadiumLocation?: string;
-  strLocation?: string;
-  strWebsite?: string;
-  strFacebook?: string;
-  strTwitter?: string;
-  strInstagram?: string;
-  strYoutube?: string;
-  strTeamBadge?: string;
-  strBadge?: string;
-  strTeamBanner?: string;
-  strBanner?: string;
-  strTeamLogo?: string;
-  strDescriptionEN?: string;
-  strCountry?: string;
-  strGender?: string;
-  intStadiumCapacity?: string;
-}
-
-interface Player {
-  idPlayer: string;
-  strPlayer: string;
-  strNationality?: string;
-  strPosition?: string;
-  dateBorn?: string;
-  strHeight?: string;
-  strWeight?: string;
-  strThumb?: string;
-  strCutout?: string;
-  strDescriptionEN?: string;
-}
+import type { TeamDetails, Player } from "@/types";
 
 // Utility functions
 const handleApiError = (context: string, error: unknown) => {

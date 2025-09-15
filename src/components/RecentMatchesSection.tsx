@@ -3,21 +3,8 @@ import Image from "next/image";
 // COMPONENTS
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import MatchTable from "@/components/MatchTable";
-interface Match {
-  strEvent: string;
-  strHomeTeam: string;
-  strAwayTeam: string;
-  intHomeScore: string;
-  intAwayScore: string;
-  dateEvent: string;
-  strLeague: string;
-}
-
-interface LeagueMatches {
-  leagueName: string;
-  leagueBadge?: string;
-  matches: Match[];
-}
+// TYPES
+import type { LeagueMatches } from "@/types";
 
 interface RecentMatchesProps {
   recentMatchesByLeague: Record<string, LeagueMatches> | null;

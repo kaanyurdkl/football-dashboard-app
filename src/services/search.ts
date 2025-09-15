@@ -1,22 +1,7 @@
 // CONFIG
 import { FEATURED_LEAGUES } from "@/config/leagues";
-
-export interface SearchTeamResult {
-  idTeam: string;
-  strTeam: string;
-  strLeague?: string;
-  strCountry?: string;
-  strBadge?: string;
-  strSport?: string;
-}
-
-export interface SearchLeagueResult {
-  idLeague: string;
-  strLeague: string;
-  strCountry: string;
-}
-
-export type SearchType = "teams" | "leagues";
+// TYPES
+import type { SearchTeamResult, SearchLeagueResult, SearchType } from "@/types";
 
 // Search teams
 export async function searchTeams(query: string): Promise<SearchTeamResult[]> {
