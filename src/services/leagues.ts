@@ -15,7 +15,7 @@ interface LeagueDetails {
   strTrophy?: string;
 }
 
-interface LeagueStanding {
+export interface LeagueStanding {
   idStanding: string;
   idTeam: string;
   intRank: string;

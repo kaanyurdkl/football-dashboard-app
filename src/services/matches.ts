@@ -3,7 +3,21 @@ import { FEATURED_LEAGUES } from "@/config/leagues";
 // UTILS
 import { getTodayDate, getYesterdayDate } from "@/lib/utils";
 
-export async function getTodaysAndRecentMatches(leagues: any[] | null) {
+interface LeagueDetails {
+  strBadge?: string;
+}
+
+interface Match {
+  strEvent: string;
+  strHomeTeam: string;
+  strAwayTeam: string;
+  intHomeScore: string;
+  intAwayScore: string;
+  dateEvent: string;
+  strLeague: string;
+}
+
+export async function getTodaysAndRecentMatches(leagues: LeagueDetails[] | null) {
   try {
     const today = getTodayDate();
     const yesterdayStr = getYesterdayDate();
@@ -26,7 +40,11 @@ export async function getTodaysAndRecentMatches(leagues: any[] | null) {
     }
 
     let todaysMatchesCount = 0;
-    const recentMatchesByLeague: Record<string, any> = {};
+    const recentMatchesByLeague: Record<string, {
+      leagueName: string;
+      leagueBadge?: string;
+      matches: Match[];
+    }> = {};
 
     FEATURED_LEAGUES.forEach((league, index) => {
       const todayData = results[index * 2];

@@ -1,7 +1,23 @@
 // CONFIG
 import { FEATURED_LEAGUES } from "@/config/leagues";
 
-export async function getFeaturedTeamsAndStadiums() {
+interface Team {
+  strTeam: string;
+  strTeamBadge: string;
+}
+
+interface ApiTeam {
+  strTeam: string;
+  strTeamBadge?: string;
+  strBadge?: string;
+  strStadium?: string;
+}
+
+export async function getFeaturedTeamsAndStadiums(): Promise<{
+  featuredTeamsCount: number | null;
+  featuredStadiumsCount: number | null;
+  teamsByLeague: Record<string, Team[]> | null;
+}> {
   try {
     const promises = FEATURED_LEAGUES.map((league) =>
       fetch(
@@ -18,7 +34,7 @@ export async function getFeaturedTeamsAndStadiums() {
 
     let featuredTeamsCount = 0;
     const featuredStadiums = new Set();
-    const teamsByLeague = {};
+    const teamsByLeague: Record<string, Team[]> = {};
 
     results.forEach((data, index) => {
       const league = FEATURED_LEAGUES[index];
@@ -26,12 +42,12 @@ export async function getFeaturedTeamsAndStadiums() {
       if (data.teams) {
         featuredTeamsCount += data.teams.length;
 
-        teamsByLeague[league.idLeague] = data.teams.slice(0, 5).map((team) => ({
+        teamsByLeague[league.idLeague] = data.teams.slice(0, 5).map((team: ApiTeam) => ({
           strTeam: team.strTeam,
-          strTeamBadge: team.strTeamBadge || team.strBadge,
+          strTeamBadge: team.strTeamBadge || team.strBadge || '',
         }));
 
-        data.teams.forEach((team) => {
+        data.teams.forEach((team: ApiTeam) => {
           if (team.strStadium) {
             featuredStadiums.add(team.strStadium);
           }
@@ -54,6 +70,7 @@ export async function getFeaturedTeamsAndStadiums() {
     return {
       featuredTeamsCount: null,
       featuredStadiumsCount: null,
+      teamsByLeague: null,
     };
   }
 }

@@ -8,7 +8,7 @@ import NationalityChart from "@/components/NationalityChart";
 import LeagueStandings from "@/components/LeagueStandings";
 // SERVICES
 import { getTeam, getTeamPlayers } from "@/services/team";
-import { getLeagueStandings } from "@/services/leagues";
+import { getLeagueStandings, type LeagueStanding } from "@/services/leagues";
 // CONFIG
 import { FEATURED_LEAGUES } from "@/config/leagues";
 // UTILS
@@ -45,7 +45,7 @@ export default async function TeamPage({
     (league) => league.strLeague === team.strLeague
   );
 
-  let standings: any[] = [];
+  let standings: LeagueStanding[] = [];
   if (leagueConfig) {
     standings = await getLeagueStandings(
       leagueConfig.idLeague,

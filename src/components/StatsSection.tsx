@@ -3,11 +3,17 @@ import StatsCard from "@/components/StatsCard";
 // CONFIG
 import { FEATURED_LEAGUES } from "@/config/leagues";
 
+interface StatsSectionProps {
+  featuredTeamsCount: number | null;
+  featuredStadiumsCount: number | null;
+  todaysMatchesCount: number | null;
+}
+
 export default async function StatsSection({
   featuredTeamsCount,
   featuredStadiumsCount,
   todaysMatchesCount,
-}) {
+}: StatsSectionProps) {
   const statsCards = [
     {
       title: "Featured Leagues",

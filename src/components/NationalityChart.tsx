@@ -12,7 +12,7 @@ import {
   ChartLegendContent,
 } from "@/components/ui/chart";
 // UTILS
-import { getNationalityDistribution, type NationalityData } from "@/lib/chart-utils";
+import { getNationalityDistribution } from "@/lib/chart-utils";
 
 interface Player {
   idPlayer: string;
@@ -68,7 +68,7 @@ export default function NationalityChart({ players }: NationalityChartProps) {
   } as ChartConfig);
 
   // Transform data for pie chart with fill colors
-  const chartData = nationalityData.map((item, index) => {
+  const chartData = nationalityData.map((item) => {
     const key = item.nationality.toLowerCase().replace(/\s+/g, "");
     return {
       nationality: key,
