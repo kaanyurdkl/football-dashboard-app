@@ -29,6 +29,7 @@ interface LeagueStandingsProps {
   leagueId: string;
   initialStandings: Team[];
   initialSeason?: string;
+  highlightTeamId?: string;
 }
 
 const fetcher = async (url: string) => {
@@ -44,6 +45,7 @@ export default function LeagueStandings({
   leagueId,
   initialStandings,
   initialSeason = "2025-2026",
+  highlightTeamId,
 }: LeagueStandingsProps) {
   const [currentSeason, setCurrentSeason] = useState(initialSeason);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -149,12 +151,18 @@ export default function LeagueStandings({
               </tr>
             </thead>
             <tbody className={isLoading ? "opacity-50" : ""}>
-              {standings.map((team: Team) => (
-                <tr
-                  key={team.idStanding}
-                  className="border-b hover:bg-muted/50"
-                >
-                  <td className="p-4 text-sm font-medium">{team.intRank}</td>
+              {standings.map((team: Team) => {
+                const isHighlighted = highlightTeamId && team.idTeam === highlightTeamId;
+                return (
+                  <tr
+                    key={team.idStanding}
+                    className={`border-b hover:bg-muted/50 ${
+                      isHighlighted
+                        ? "bg-primary/10 border-primary/20 ring-1 ring-primary/20"
+                        : ""
+                    }`}
+                  >
+                    <td className="p-4 text-sm font-medium">{team.intRank}</td>
                   <td className="p-4">
                     <div className="flex items-center gap-3">
                       {team.strBadge && (
@@ -195,8 +203,9 @@ export default function LeagueStandings({
                   <td className="text-center p-4 text-xs font-mono">
                     {team.strForm}
                   </td>
-                </tr>
-              ))}
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

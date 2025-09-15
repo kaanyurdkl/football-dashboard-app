@@ -5,8 +5,14 @@ import Image from "next/image";
 import CollapsibleDescription from "@/components/CollapsibleDescription";
 import PositionChart from "@/components/PositionChart";
 import NationalityChart from "@/components/NationalityChart";
+import LeagueStandings from "@/components/LeagueStandings";
 // SERVICES
 import { getTeam, getTeamPlayers } from "@/services/team";
+import { getLeagueStandings } from "@/services/leagues";
+// CONFIG
+import { FEATURED_LEAGUES } from "@/config/leagues";
+// UTILS
+import { getCurrentSeason } from "@/lib/utils";
 // ICONS
 import {
   Calendar,
@@ -34,7 +40,18 @@ export default async function TeamPage({
 
   const players = await getTeamPlayers(team.idTeam);
 
-  console.log(players);
+  // Get league standings if team is in a featured league
+  const leagueConfig = FEATURED_LEAGUES.find(
+    (league) => league.strLeague === team.strLeague
+  );
+
+  let standings: any[] = [];
+  if (leagueConfig) {
+    standings = await getLeagueStandings(
+      leagueConfig.idLeague,
+      getCurrentSeason()
+    );
+  }
 
   return (
     <div className="space-y-8">
@@ -119,7 +136,6 @@ export default async function TeamPage({
                   )}
                 </div>
               </div>
-
               {team.strDescriptionEN && (
                 <CollapsibleDescription
                   description={team.strDescriptionEN}
@@ -129,7 +145,6 @@ export default async function TeamPage({
             </div>
           </div>
         </div>
-
         <div className="space-y-6">
           <div className="bg-card rounded-lg border p-6">
             <h2 className="text-xl font-semibold mb-4">Team Information</h2>
@@ -145,7 +160,6 @@ export default async function TeamPage({
                   </div>
                 </div>
               )}
-
               {team.strStadium && (
                 <div className="flex items-center gap-3">
                   <MapPin className="h-4 w-4 text-muted-foreground" />
@@ -163,7 +177,6 @@ export default async function TeamPage({
                   </div>
                 </div>
               )}
-
               {team.strLocation && (
                 <div className="flex items-center gap-3">
                   <MapPin className="h-4 w-4 text-muted-foreground" />
@@ -175,7 +188,6 @@ export default async function TeamPage({
                   </div>
                 </div>
               )}
-
               {team.strSport && (
                 <div className="flex items-center gap-3">
                   <Users className="h-4 w-4 text-muted-foreground" />
@@ -189,7 +201,6 @@ export default async function TeamPage({
           </div>
         </div>
       </div>
-
       {players.length > 0 && (
         <div className="space-y-8">
           <div className="bg-card rounded-lg border p-6">
@@ -232,12 +243,19 @@ export default async function TeamPage({
               ))}
             </div>
           </div>
-
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <PositionChart players={players} />
             <NationalityChart players={players} />
           </div>
         </div>
+      )}
+      {standings.length > 0 && leagueConfig && (
+        <LeagueStandings
+          leagueId={leagueConfig.idLeague}
+          initialStandings={standings}
+          initialSeason={getCurrentSeason()}
+          highlightTeamId={team.idTeam}
+        />
       )}
     </div>
   );
