@@ -17,10 +17,18 @@ export async function getFeaturedTeamsAndStadiums() {
 
     let featuredTeamsCount = 0;
     const featuredStadiums = new Set();
+    const teamsByLeague = {};
 
-    results.forEach((data) => {
+    results.forEach((data, index) => {
+      const league = FEATURED_LEAGUES[index];
+
       if (data.teams) {
         featuredTeamsCount += data.teams.length;
+
+        teamsByLeague[league.idLeague] = data.teams.slice(0, 5).map((team) => ({
+          strTeam: team.strTeam,
+          strTeamBadge: team.strTeamBadge || team.strBadge,
+        }));
 
         data.teams.forEach((team) => {
           if (team.strStadium) {
@@ -30,7 +38,11 @@ export async function getFeaturedTeamsAndStadiums() {
       }
     });
 
-    return { featuredTeamsCount, featuredStadiumsCount: featuredStadiums.size };
+    return {
+      featuredTeamsCount,
+      featuredStadiumsCount: featuredStadiums.size,
+      teamsByLeague,
+    };
   } catch (error) {
     if (error instanceof Error && error.message) {
       console.error("Teams data error:", error.message);

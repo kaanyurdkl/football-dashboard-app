@@ -20,12 +20,20 @@ interface League {
   strBanner?: string;
   strBadge?: string;
 }
+interface Team {
+  strTeam: string;
+  strTeamBadge: string;
+}
 
 interface LeagueCarouselProps {
   leagues: League[] | null;
+  teamsByLeague: Record<string, Team[]> | null;
 }
 
-export default function LeagueCarousel({ leagues }: LeagueCarouselProps) {
+export default function LeagueCarousel({
+  leagues,
+  teamsByLeague,
+}: LeagueCarouselProps) {
   const plugin = useRef(
     Autoplay({
       delay: 3000,
@@ -47,17 +55,19 @@ export default function LeagueCarousel({ leagues }: LeagueCarouselProps) {
       <CarouselContent>
         {leagues.map((league, index) => (
           <CarouselItem key={index}>
-            {league.strBanner && (
-              <div className="relative w-full h-32">
-                <Image
-                  src={league.strBanner}
-                  alt={`${league.strLeague} banner`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              </div>
-            )}
+            <div className="bg-card rounded-lg border overflow-hidden">
+              {league.strBanner && (
+                <div className="relative w-full h-32">
+                  <Image
+                    src={league.strBanner}
+                    alt={`${league.strLeague} banner`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
+              )}
+            </div>
             <div className="p-6 flex flex-col gap-4 lg:flex-row">
               <div className="flex gap-3 items-center">
                 {league.strBadge && (
@@ -78,6 +88,26 @@ export default function LeagueCarousel({ leagues }: LeagueCarouselProps) {
                   </p>
                 </div>
               </div>
+              {teamsByLeague && teamsByLeague[league.idLeague] && (
+                <div className="flex grow justify-between lg:justify-end items-center gap-4 p-2">
+                  {teamsByLeague[league.idLeague]
+                    .filter((team) => team.strTeamBadge)
+                    .map((team, teamIndex) => (
+                      <div
+                        key={teamIndex}
+                        className="relative w-10 h-10 flex-shrink-0"
+                      >
+                        <Image
+                          src={team.strTeamBadge}
+                          alt={`${team.strTeam} logo`}
+                          fill
+                          className="object-contain"
+                          sizes="40px"
+                        />
+                      </div>
+                    ))}
+                </div>
+              )}
             </div>
           </CarouselItem>
         ))}

@@ -1,14 +1,14 @@
 // COMPONENTS
 import StatsCard from "@/components/StatsCard";
 // SERVICES
-import { getFeaturedTeamsAndStadiums } from "@/services/teams";
 import { getTodaysMatches } from "@/services/matches";
 // CONFIG
 import { FEATURED_LEAGUES } from "@/config/leagues";
 
-export default async function Stats() {
-  const { featuredTeamsCount, featuredStadiumsCount } =
-    await getFeaturedTeamsAndStadiums();
+export default async function Stats({
+  featuredTeamsCount,
+  featuredStadiumsCount,
+}) {
   const { todaysMatchesCount } = await getTodaysMatches();
 
   const statsCards = [
