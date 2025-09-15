@@ -1,7 +1,7 @@
 // LIBRARIES
 import { notFound } from "next/navigation";
 // SERVICES
-import { getTeam } from "@/services/team";
+import { getTeam, getTeamPlayers } from "@/services/team";
 import Image from "next/image";
 import CollapsibleDescription from "@/components/CollapsibleDescription";
 import {
@@ -28,7 +28,9 @@ export default async function TeamPage({
     notFound();
   }
 
-  console.log(team);
+  const players = await getTeamPlayers(team.idTeam);
+
+  console.log(players);
 
   return (
     <div className="space-y-8">
@@ -183,6 +185,49 @@ export default async function TeamPage({
           </div>
         </div>
       </div>
+
+      {players.length > 0 && (
+        <div className="bg-card rounded-lg border p-6">
+          <h2 className="text-2xl font-bold mb-6">Squad</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {players.map((player) => (
+              <div
+                key={player.idPlayer}
+                className="bg-muted/50 rounded-lg p-4 hover:bg-muted/70 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  {player.strThumb && (
+                    <div className="relative w-12 h-12 rounded-full overflow-hidden bg-background">
+                      <Image
+                        src={player.strThumb}
+                        alt={player.strPlayer}
+                        fill
+                        className="object-cover"
+                        sizes="48px"
+                      />
+                    </div>
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-medium text-sm truncate">
+                      {player.strPlayer}
+                    </h3>
+                    {player.strPosition && (
+                      <p className="text-xs text-muted-foreground">
+                        {player.strPosition}
+                      </p>
+                    )}
+                    {player.strNationality && (
+                      <p className="text-xs text-muted-foreground">
+                        {player.strNationality}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -28,6 +28,19 @@ interface TeamDetails {
   intStadiumCapacity?: string;
 }
 
+interface Player {
+  idPlayer: string;
+  strPlayer: string;
+  strNationality?: string;
+  strPosition?: string;
+  dateBorn?: string;
+  strHeight?: string;
+  strWeight?: string;
+  strThumb?: string;
+  strCutout?: string;
+  strDescriptionEN?: string;
+}
+
 // Utility functions
 const handleApiError = (context: string, error: unknown) => {
   const message = error instanceof Error ? error.message : "Unknown error";
@@ -56,5 +69,19 @@ export async function getTeam(teamName: string): Promise<TeamDetails | null> {
   } catch (error) {
     handleApiError(`getTeam("${teamName}")`, error);
     return null;
+  }
+}
+
+export async function getTeamPlayers(teamId: string): Promise<Player[]> {
+  try {
+    const data = await fetchWithValidation(
+      `https://www.thesportsdb.com/api/v1/json/123/lookup_all_players.php?id=${teamId}`,
+      `Team players for ID ${teamId}`
+    );
+
+    return data.player || [];
+  } catch (error) {
+    handleApiError(`getTeamPlayers(${teamId})`, error);
+    return [];
   }
 }
