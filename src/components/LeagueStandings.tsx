@@ -105,7 +105,7 @@ export default function LeagueStandings({
   return (
     <div ref={containerRef} className="bg-card rounded-lg border">
       <div className="p-6 border-b">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-0 sm:items-center justify-between">
           <div>
             <h2 className="text-2xl font-bold">League Standings</h2>
             <p className="text-muted-foreground mt-1">

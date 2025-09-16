@@ -33,16 +33,19 @@ npm run dev
 ## Testing the App
 
 **Exploring Team Pages:**
+
 - Search for "Arsenal" or "Manchester United" in the search bar
 - Click any team name in the league standings tables
 - View player squads with position and nationality distribution charts
 
 **Exploring League Pages:**
+
 - Search for leagues like "Premier League" or "La Liga"
 - Click featured league cards on the homepage
 - Browse standings with season selection functionality
 
 **Key Features to Test:**
+
 - Interactive charts showing player position and nationality data
 - Real-time search with smart caching
 - Responsive design across different screen sizes
@@ -54,5 +57,4 @@ npm run dev
 - **User Features**: Favorite teams, personalized dashboards, dark mode
 - **Advanced Visualizations**: Performance trends, heat maps, league comparisons
 - **Design & UX**: Improved visual design, animations, accessibility enhancements
-- **Testing**: Unit tests, integration tests, end-to-end testing with Playwright
-- **Technical**: Progressive Web App, advanced caching with Redis
+- **Testing**: Unit tests, integration tests

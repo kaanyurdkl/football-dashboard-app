@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 // COMPONENTS
 import CollapsibleDescription from "@/components/CollapsibleDescription";
 import LeagueStandings from "@/components/LeagueStandings";
+import FeaturedTeams from "@/components/FeaturedTeams";
 // SERVICES
 import { getLeagueWithStandings } from "@/services/leagues";
 // UTILS
@@ -146,6 +147,13 @@ export default async function LeaguePage({
           )}
         </div>
       </div>
+
+      {standings.length > 0 && (
+        <FeaturedTeams
+          standings={standings}
+          leagueName={details?.strLeague || config?.strLeague || "League"}
+        />
+      )}
 
       <LeagueStandings
         leagueId={id}
