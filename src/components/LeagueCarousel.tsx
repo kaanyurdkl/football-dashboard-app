@@ -3,8 +3,10 @@
 // LIBRARIES
 import { useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
+import Link from "next/link";
 // COMPONENTS
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 import {
   Carousel,
   CarouselContent,
@@ -12,6 +14,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+// ICONS
+import { ArrowRight } from "lucide-react";
 
 interface League {
   idLeague: string;
@@ -68,46 +72,57 @@ export default function LeagueCarousel({
                 </div>
               )}
             </div>
-            <div className="p-6 flex flex-col gap-4 lg:flex-row">
-              <div className="flex gap-3 items-center">
-                {league.strBadge && (
-                  <div className="relative w-8 h-8 flex-shrink-0">
-                    <Image
-                      src={league.strBadge}
-                      alt={`${league.strLeague} logo`}
-                      fill
-                      className="object-contain"
-                      sizes="32px"
-                    />
+            <div className="p-6">
+              <div className="flex justify-between items-start mb-4">
+                <div className="flex gap-3 items-center">
+                  {league.strBadge && (
+                    <div className="relative w-8 h-8 flex-shrink-0">
+                      <Image
+                        src={league.strBadge}
+                        alt={`${league.strLeague} logo`}
+                        fill
+                        className="object-contain"
+                        sizes="32px"
+                      />
+                    </div>
+                  )}
+                  <div className="text-left">
+                    <h4 className="font-medium text-sm">{league.strLeague}</h4>
+                    <p className="text-xs text-muted-foreground">
+                      {league.strCountry}
+                    </p>
+                  </div>
+                </div>
+                {teamsByLeague && teamsByLeague[league.idLeague] && (
+                  <div className="flex items-center gap-2">
+                    {teamsByLeague[league.idLeague]
+                      .filter((team) => team.strTeamBadge)
+                      .slice(0, 4)
+                      .map((team, teamIndex) => (
+                        <div
+                          key={teamIndex}
+                          className="relative w-8 h-8 flex-shrink-0"
+                        >
+                          <Image
+                            src={team.strTeamBadge}
+                            alt={`${team.strTeam} logo`}
+                            fill
+                            className="object-contain"
+                            sizes="32px"
+                          />
+                        </div>
+                      ))}
                   </div>
                 )}
-                <div className="text-left">
-                  <h4 className="font-medium text-sm">{league.strLeague}</h4>
-                  <p className="text-xs text-muted-foreground">
-                    {league.strCountry}
-                  </p>
-                </div>
               </div>
-              {teamsByLeague && teamsByLeague[league.idLeague] && (
-                <div className="flex grow justify-between lg:justify-end items-center gap-4 p-2">
-                  {teamsByLeague[league.idLeague]
-                    .filter((team) => team.strTeamBadge)
-                    .map((team, teamIndex) => (
-                      <div
-                        key={teamIndex}
-                        className="relative w-10 h-10 flex-shrink-0"
-                      >
-                        <Image
-                          src={team.strTeamBadge}
-                          alt={`${team.strTeam} logo`}
-                          fill
-                          className="object-contain"
-                          sizes="40px"
-                        />
-                      </div>
-                    ))}
-                </div>
-              )}
+              <div className="flex justify-end">
+                <Button asChild size="sm" variant="outline">
+                  <Link href={`/league/${league.idLeague}`}>
+                    View League
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
             </div>
           </CarouselItem>
         ))}
