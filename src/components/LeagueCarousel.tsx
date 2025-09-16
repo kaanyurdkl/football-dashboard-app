@@ -99,9 +99,10 @@ export default function LeagueCarousel({
                       .filter((team) => team.strTeamBadge)
                       .slice(0, 4)
                       .map((team, teamIndex) => (
-                        <div
+                        <Link
                           key={teamIndex}
-                          className="relative w-8 h-8 flex-shrink-0"
+                          href={`/team/${encodeURIComponent(team.strTeam)}`}
+                          className="relative w-8 h-8 flex-shrink-0 hover:scale-110 transition-transform"
                         >
                           <Image
                             src={team.strTeamBadge}
@@ -110,7 +111,7 @@ export default function LeagueCarousel({
                             className="object-contain"
                             sizes="32px"
                           />
-                        </div>
+                        </Link>
                       ))}
                   </div>
                 )}
