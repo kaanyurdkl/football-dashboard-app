@@ -108,7 +108,7 @@ export default async function TeamPage({
                   )}
                   {team.strFacebook && (
                     <a
-                      href={`https://facebook.com/${team.strFacebook}`}
+                      href={`https://${team.strFacebook}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-muted-foreground hover:text-foreground transition-colors"
@@ -118,7 +118,7 @@ export default async function TeamPage({
                   )}
                   {team.strTwitter && (
                     <a
-                      href={`https://twitter.com/${team.strTwitter}`}
+                      href={`https://${team.strTwitter}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-muted-foreground hover:text-foreground transition-colors"
@@ -128,7 +128,7 @@ export default async function TeamPage({
                   )}
                   {team.strInstagram && (
                     <a
-                      href={`https://instagram.com/${team.strInstagram}`}
+                      href={`https://${team.strInstagram}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-muted-foreground hover:text-foreground transition-colors"
