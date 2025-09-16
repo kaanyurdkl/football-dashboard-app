@@ -6,7 +6,14 @@ A football dashboard built with Next.js displaying league standings, team inform
 
 **Selected API:** [TheSportsDB.com](https://thesportsdb.com)
 
-Chosen for its comprehensive football data, free tier availability, and reliable service. Provides leagues, teams, players, standings, and match information without cost barriers.
+Chosen for its comprehensive football data, free tier availability, and reliable service. Provides leagues, teams, players, standings, and match information without cost barriers. Additionally, as a football enthusiast, this project allowed me to combine my passion for the sport with technical development.
+
+**API Rate Limits:** The free tier has specific constraints:
+- 30 requests per minute overall
+- Search endpoints limited to 2 requests each (teams, events, players, venues)
+- Exceeding limits returns HTTP 429 status
+
+To work within these limits, the app implements smart caching with `force-cache`, hybrid search strategies (API for teams, client-side for leagues), and intelligent fallback mechanisms for match data.
 
 ## Key Features
 
