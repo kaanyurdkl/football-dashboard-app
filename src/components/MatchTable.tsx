@@ -29,6 +29,7 @@ export default function MatchTable({ matches }: MatchTableProps) {
         <TableRow>
           <TableHead className="text-xs">Match</TableHead>
           <TableHead className="text-xs text-center">Score</TableHead>
+          <TableHead className="text-xs text-center">Date</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -46,6 +47,14 @@ export default function MatchTable({ matches }: MatchTableProps) {
                 {match.intHomeScore !== null && match.intAwayScore !== null
                   ? `${match.intHomeScore}-${match.intAwayScore}`
                   : "TBD"}
+              </div>
+            </TableCell>
+            <TableCell className="text-xs text-center">
+              <div className="text-muted-foreground">
+                {new Date(match.dateEvent).toLocaleDateString('en-US', {
+                  month: 'short',
+                  day: 'numeric'
+                })}
               </div>
             </TableCell>
           </TableRow>

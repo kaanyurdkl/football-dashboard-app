@@ -133,4 +133,5 @@ export interface LeagueMatches {
   leagueName: string;
   leagueBadge?: string;
   matches: Match[];
+  dateRange: string;
 }

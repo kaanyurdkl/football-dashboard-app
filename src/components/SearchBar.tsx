@@ -97,19 +97,23 @@ export default function SearchBar() {
         value={searchType}
         onValueChange={(value: SearchType) => setSearchType(value)}
       >
-        <SelectTrigger className="w-48">
+        <SelectTrigger className="w-28 sm:w-48">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="teams">Search by Teams</SelectItem>
-          <SelectItem value="leagues">Search by Leagues</SelectItem>
+          <SelectItem value="teams">
+            <span className="hidden sm:inline">Search by</span> Teams
+          </SelectItem>
+          <SelectItem value="leagues">
+            <span className="hidden sm:inline">Search by</span> Leagues
+          </SelectItem>
         </SelectContent>
       </Select>
       <div className="relative flex-1">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
         <Input
           type="text"
-          placeholder={`Search ${searchType}...`}
+          placeholder={`Search...`}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           className="pl-10 w-full"

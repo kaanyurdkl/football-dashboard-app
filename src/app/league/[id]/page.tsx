@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import CollapsibleDescription from "@/components/CollapsibleDescription";
 import LeagueStandings from "@/components/LeagueStandings";
 import FeaturedTeams from "@/components/FeaturedTeams";
+import LeagueRecentMatches from "@/components/LeagueRecentMatches";
 // SERVICES
 import { getLeagueWithStandings } from "@/services/leagues";
 // UTILS
@@ -148,12 +149,18 @@ export default async function LeaguePage({
         </div>
       </div>
 
-      {standings.length > 0 && (
-        <FeaturedTeams
-          standings={standings}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {standings.length > 0 && (
+          <FeaturedTeams
+            standings={standings}
+            leagueName={details?.strLeague || config?.strLeague || "League"}
+          />
+        )}
+        <LeagueRecentMatches
+          leagueId={id}
           leagueName={details?.strLeague || config?.strLeague || "League"}
         />
-      )}
+      </div>
 
       <LeagueStandings
         leagueId={id}
